@@ -1,0 +1,106 @@
+# leaderboard.py
+# The leaderboard module to be used in Activity 1.2.2
+import csv
+
+# set the levels of scoring
+bronze_score = 15
+silver_score = 20
+gold_score = 25
+
+
+# return names in the leaderboard file
+def get_names(file_name):
+    names = []
+
+    with open(file_name, 'r') as file:
+        csv_reader = csv.DictReader(file)
+        data = [row for row in csv_reader]
+        for d in data:
+            names.append(d['name'])
+
+    return names
+
+
+# return scores from the leaderboard file
+def get_scores(file_name):
+    scores = []
+
+    with open(file_name, 'r') as file:
+        csv_reader = csv.DictReader(file)
+        data = [row for row in csv_reader]
+        for d in data:
+            scores.append(d['score'])
+
+    return scores
+
+
+# update leaderboard by inserting the current player and score to the list at the correct position
+def update_leaderboard(file_name, leader_names, leader_scores, player_name, player_score):
+    index = 0
+
+    for score in leader_scores:
+        if score < player_score:
+            break
+        else:
+            index = index + 1
+
+    leader_names.insert(index, player_name)
+    leader_scores.insert(index, player_score)
+    leader_names.pop()
+    leader_scores.pop()
+
+
+
+    # TODO 12: store the latest leaderboard back in the file
+
+    '''
+    leaderboard_file = open(file_name, "w")  # this mode opens the file and erases its contents for a fresh start
+  
+    # TODO 13 loop through all the leaderboard elements and write them to the the file
+    for   :
+      leaderboard_file.write(leader_names[index] + "," + str(leader_scores[index]) + "\n")
+  
+    leaderboard_file.close()
+     '''
+
+
+# draw leaderboard and display a message to player
+def draw_leaderboard(high_scorer, leader_names, leader_scores, turtle_object, player_score):
+    # clear the screen and move turtle object to (-200, 100) to start drawing the leaderboard
+    font_setup = ("Arial", 20, "normal")
+    turtle_object.clear()
+    turtle_object.penup()
+    turtle_object.goto(-160, 100)
+    turtle_object.hideturtle()
+    turtle_object.down()
+
+    # loop through the lists and use the same index to display the corresponding name and score, separated by a tab space '\t'
+    for index in range(len(leader_names)):
+        turtle_object.write(str(index + 1) + "\t" + leader_names[index] + "\t" + str(leader_scores[index]),
+                            font=font_setup)
+        turtle_object.penup()
+        turtle_object.goto(-160, int(turtle_object.ycor()) - 50)
+        turtle_object.down()
+
+    # move turtle to a new line
+    turtle_object.penup()
+    turtle_object.goto(-160, int(turtle_object.ycor()) - 50)
+    turtle_object.pendown()
+
+    # TODO 14: display message about player making/not making leaderboard
+    '''
+      turtle_object.write("Congratulations!\nYou made the leaderboard!", font=font_setup)
+      turtle_object.write("Sorry!\nYou didn't make the leaderboard.\nMaybe next time!", font=font_setup)
+    '''
+
+    # move turtle to a new line
+    turtle_object.penup()
+    turtle_object.goto(-160, int(turtle_object.ycor()) - 50)
+    turtle_object.pendown()
+
+    # TODO 15: Display a gold/silver/bronze message if player earned a gold/silver/or bronze medal; display nothing if no medal
+    '''
+      turtle_object.write("You earned a gold medal!", font=font_setup)
+      turtle_object.write("You earned a silver medal!", font=font_setup)
+      turtle_object.write("You earned a bronze medal!", font=font_setup)
+    '''
