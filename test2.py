@@ -42,7 +42,7 @@ words = ["bytes", "mouse", "input", "logic", "array"]
 target = r.choice(words)
 
 
-user_choice = t.textinput("Picka Word", "Insert word to be guessed")
+# user_choice = t.textinput("Picka Word", "Insert word to be guessed")
 
 def word_checker(user_answer):
     while user_answer != target:
@@ -61,5 +61,21 @@ def word_checker(user_answer):
 for i in range(5):
     make_boxes(row_start_x, row_start_y)
     row_start_y -= 100
+
+boxer.penup()
+boxer.goto(-240,230)
+boxer.pendown()
+boxer.write("A", font=("Arial", 30, "bold"))
+
+boxer.penup()
+boxer.goto(-130,230)
+boxer.pendown()
+boxer.write("B", font=("Arial", 30, "bold"))
+
+boxer.penup()
+boxer.goto(-130,230)
+boxer.pendown()
+boxer.write("B", font=("Arial", 30, "bold"))
+
 
 sc.mainloop()
