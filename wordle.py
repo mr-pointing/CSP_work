@@ -7,6 +7,7 @@ Recreating the game Wordle to be played via the Turtle library
 # Imports
 import random as r
 import turtle as t
+import sys
 
 # Turtle Env Variables
 sc = t.Screen()
@@ -50,6 +51,7 @@ def word_checker(user_answer, target):
     print(return_list)
     return return_list
 
+
 def get_color(ans):
     if ans is True:
         return "green"
@@ -58,12 +60,12 @@ def get_color(ans):
     else:
         return "orange"
 
+
 def write_word(user_word, target, letter_x, letter_y):
     answer = word_checker(user_word, target)
     checks = []
 
     for i in range(5):
-        print(checks)
         boxer.penup()
         boxer.goto(letter_x, letter_y)
         boxer.pendown()
@@ -77,9 +79,23 @@ def write_word(user_word, target, letter_x, letter_y):
     return checks
 
 
+def load(file):
+    """Open a text file & return a list of lower case strings"""
+    try:
+        with open(file) as in_file:
+            loaded_txt = in_file.read().strip().split('\n')
+            loaded_txt = [x.lower() for x in loaded_txt if len(x) == 5]
+            return loaded_txt
+    except IOError as e:
+        print(f"{e}\nError opening {file}. Terminating program.")
+        sys.exit(1)
+
+
 # Game Variables
+dictionary = "2of4brif.txt"
 words = ["bytes", "mouse", "input", "logic", "array"]
 word_choice = r.choice(words)
+print(word_choice)
 
 for i in range(5):
     make_boxes(row_start_x, row_start_y)
@@ -96,6 +112,5 @@ for i in range(5):
         else:
             pass
     letter_start_y -= 100
-
 
 sc.mainloop()
