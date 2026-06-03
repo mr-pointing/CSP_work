@@ -103,6 +103,12 @@ for i in range(5):
 
 for i in range(5):
     user_choice = t.textinput("Picka Word", "Insert word to be guessed").lower()
+    valid = False
+    while not valid:
+        if len(user_choice) < 5:
+            user_choice = t.textinput("Picka Word", "Insert word to be guessed 5 LETTERS ONLY!").lower()
+        else:
+            valid = True
     ans_list = write_word(user_choice, word_choice, letter_start_x, letter_start_y)
     if len(ans_list) == 5:
         user_restart = t.textinput("Congratulations!",
