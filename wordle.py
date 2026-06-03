@@ -93,13 +93,14 @@ def load(file):
 
 # Game Variables
 dictionary = "2of4brif.txt"
-words = ["bytes", "mouse", "input", "logic", "array"]
-word_choice = r.choice(words)
-print(word_choice)
+words = load(dictionary)
 
 for i in range(5):
     make_boxes(row_start_x, row_start_y)
     row_start_y -= 100
+
+word_choice = r.choice(words)
+print(word_choice)
 
 for i in range(5):
     user_choice = t.textinput("Picka Word", "Insert word to be guessed").lower()
