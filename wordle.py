@@ -99,25 +99,35 @@ for i in range(5):
     make_boxes(row_start_x, row_start_y)
     row_start_y -= 100
 
-word_choice = r.choice(words)
-print(word_choice)
+game_loop = True
+while game_loop:
 
-for i in range(5):
-    user_choice = t.textinput("Picka Word", "Insert word to be guessed").lower()
-    valid = False
-    while not valid:
-        if len(user_choice) < 5:
-            user_choice = t.textinput("Picka Word", "Insert word to be guessed 5 LETTERS ONLY!").lower()
-        else:
-            valid = True
-    ans_list = write_word(user_choice, word_choice, letter_start_x, letter_start_y)
-    if len(ans_list) == 5:
-        user_restart = t.textinput("Congratulations!",
-                                   "Would you like to try again?\n(Yes for again, No for Quit.)").lower()
-        if user_restart == "no":
-            exit()
-        else:
-            pass
-    letter_start_y -= 100
+    word_choice = r.choice(words)
+    print(word_choice)
+
+    for i in range(5):
+        user_choice = t.textinput("Picka Word", "Insert word to be guessed").lower()
+        valid = False
+        while not valid:
+            if len(user_choice) < 5:
+                user_choice = t.textinput("Picka Word", "Insert word to be guessed 5 LETTERS ONLY!").lower()
+            else:
+                valid = True
+        ans_list = write_word(user_choice, word_choice, letter_start_x, letter_start_y)
+        if len(ans_list) == 5:
+            user_restart = t.textinput("Congratulations!",
+                                       "Would you like to try again?\n(Yes for again, No for Quit.)").lower()
+            if user_restart == "no":
+                game_loop = False
+            else:
+                boxer.clear()
+                row_start_x = -275
+                row_start_y = 300
+                boxer.pencolor("#fcfffa")
+                for i in range(5):
+                    make_boxes(row_start_x, row_start_y)
+                    row_start_y -= 100
+                break
+        letter_start_y -= 100
 
 sc.mainloop()
