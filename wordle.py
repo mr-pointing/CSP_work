@@ -104,6 +104,7 @@ while game_loop:
 
     word_choice = r.choice(words)
     print(word_choice)
+    print(len(words))
 
     for i in range(5):
         user_choice = t.textinput("Picka Word", "Insert word to be guessed").lower()
@@ -118,11 +119,13 @@ while game_loop:
             user_restart = t.textinput("Congratulations!",
                                        "Would you like to try again?\n(Yes for again, No for Quit.)").lower()
             if user_restart == "no":
-                game_loop = False
+                quit()
             else:
                 boxer.clear()
                 row_start_x = -275
                 row_start_y = 300
+                letter_start_x = -240
+                letter_start_y = 230
                 boxer.pencolor("#fcfffa")
                 for i in range(5):
                     make_boxes(row_start_x, row_start_y)
